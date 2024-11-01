@@ -1,0 +1,1066 @@
+openapi: 3.1.0
+info:
+  version: 'v1'
+  title: 'SSO Service'
+  description: |-
+    This is SSO.
+  contact:
+    name: Pusdatin Kemdikbudristek
+    email: pusdatin@kemdikbud.go.id
+  license:
+    name: pusdatin
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+tags:
+  - name: Perekaman PTK
+    description: API for recording PTK data.
+  - name: Reference Data
+    description: API for fetching reference data like Agama, Jenis PTK, etc.
+
+paths:
+  /v1/vervalptk-service/perekaman/perekaman-ptk:
+    post:
+      description: |-
+        Endpoint to record PTK data.
+      tags:
+        - Perekaman PTK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nik:
+                  type: string
+                  maxLength: 16
+                  example: "1234567890123456"
+                nama:
+                  type: string
+                  maxLength: 200
+                  example: "John Doe"
+                tempat_lahir:
+                  type: string
+                  maxLength: 80
+                  example: "Jakarta"
+                tanggal_lahir:
+                  type: string
+                  format: date
+                  example: "1980-01-01"
+                jenis_kelamin:
+                  type: string
+                  maxLength: 1
+                  example: "L"
+                nama_ibu_kandung:
+                  type: string
+                  maxLength: 200
+                  example: "Jane Doe"
+                agama_id:
+                  type: integer
+                  example: 1
+                kebutuhan_khusus_id:
+                  type: integer
+                  example: 1
+                status_perkawinan:
+                  type: number
+                  format: double
+                  example: 1
+                email:
+                  type: string
+                  format: email
+                  maxLength: 60
+                  example: "johndoe@example.com"
+                alamat_jalan:
+                  type: string
+                  maxLength: 255
+                  example: "Jl. Merdeka No. 1"
+                rt:
+                  type: number
+                  format: double
+                  example: 1
+                rw:
+                  type: number
+                  format: double
+                  example: 2
+                kode_wilayah:
+                  type: string
+                  maxLength: 8
+                  example: "032713AH"
+                kode_pos:
+                  type: string
+                  maxLength: 5
+                  example: "12345"
+                jenis_ptk_id:
+                  type: number
+                  format: double
+                  example: 1
+                jabatan_ptk_id:
+                  type: number
+                  format: double
+                  example: 1
+                status_kepegawaian_id:
+                  type: integer
+                  example: 1
+                nip:
+                  type: string
+                  maxLength: 18
+                  example: "123456789012345678"
+                lembaga_pengangkat_id:
+                  type: number
+                  format: double
+                  example: 1
+                sk_pengangkatan:
+                  type: string
+                  maxLength: 80
+                  example: "SK12345"
+                tmt_pengangkatan:
+                  type: string
+                  format: date
+                  example: "2020-01-01"
+                sumber_gaji_id:
+                  type: number
+                  format: double
+                  example: 1
+                sekolah_id:
+                  type: string
+                  example: "30e40bb9-e232-4963-be7b-f35160355c64"
+                sudah_lisensi_kepala_sekolah:
+                  type: number
+                  format: double
+                  example: 1
+                nomor_surat_tugas:
+                  type: string
+                  maxLength: 50
+                  example: "ST12345"
+                tgl_surat_tugas:
+                  type: string
+                  format: date
+                  example: "2020-01-01"
+                tmt_tugas:
+                  type: string
+                  format: date
+                  example: "2020-01-01"
+                kewarganegaraan:
+                  type: string
+                  maxLength: 2
+                  example: "ID"
+                status_keaktifan_id:
+                  type: integer
+                  example: 1
+                pekerjaan_suami_istri:
+                  type: integer
+                  example: 1
+                soft_delete:
+                  type: number
+                  format: double
+                  example: 0
+                jenis_keluar_id:
+                  type: number
+                  format: double
+                  example: 1
+                tgl_ptk_keluar:
+                  type: string
+                  format: date
+                  example: "2020-01-01"
+                ptk_induk:
+                  type: number
+                  format: double
+                  example: 1
+                aktif_bulan_01:
+                  type: number
+                  format: double
+                  example: 1
+                aktif_bulan_02:
+                  type: number
+                  format: double
+                  example: 1
+                aktif_bulan_03:
+                  type: number
+                  format: double
+                  example: 1
+                aktif_bulan_04:
+                  type: number
+                  format: double
+                  example: 1
+                aktif_bulan_05:
+                  type: number
+                  format: double
+                  example: 1
+                aktif_bulan_06:
+                  type: number
+                  format: double
+                  example: 1
+                aktif_bulan_07:
+                  type: number
+                  format: double
+                  example: 1
+                aktif_bulan_08:
+                  type: number
+                  format: double
+                  example: 1
+                aktif_bulan_09:
+                  type: number
+                  format: double
+                  example: 1
+                aktif_bulan_10:
+                  type: number
+                  format: double
+                  example: 1
+                aktif_bulan_11:
+                  type: number
+                  format: double
+                  example: 1
+                aktif_bulan_12:
+                  type: number
+                  format: double
+                  example: 1
+                status_approval:
+                  type: integer
+                  example: 1
+                approval_date:
+                  type: string
+                  format: date
+                  example: "2020-01-01"
+                keterangan:
+                  type: string
+                  maxLength: 250
+                  example: "Approved"
+      responses:
+        '200':
+          description: Successfully recorded PTK data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandarAPIModel'
+        '203':
+          description: Data already exists.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandarAPIModel'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandarAPIModel'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandarAPIModel'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandarAPIModel'
+        '422':
+          description: Validation Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandarAPIModel'
+
+  /v1/vervalptk-service/referensi/get-agama:
+    get:
+      description: Fetch Agama
+      tags:
+        - Reference Data    
+      responses:
+        '200':
+          description: Successfully fetched agama data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandarAPIModel'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorModel'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorModel'
+  
+  /v1/vervalptk-service/referensi/get-jenis-ptk:
+    get:
+      description: Fetch Jenis PTK 
+      tags:
+        - Reference Data
+      responses:
+        '200':
+          description: Successfully fetched agama data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandarAPIModel'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorModel'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorModel'
+
+  /v1/vervalptk-service/referensi/get-kebutuhan-khusus:
+    get:
+      description: Fetch Kebutuhan Khusus
+      tags:
+        - Reference Data
+      parameters:
+        - in: query
+          name: kebutuhan_khusus
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully fetched Kebutuhan Khusus data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandarAPIModel'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorModel'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorModel'
+
+  /v1/vervalptk-service/referensi/get-lembaga-pengangkat:
+    get:
+      description: Fetch Lembaga Pengangkat 
+      tags:
+        - Reference Data
+      responses:
+        '200':
+          description: Successfully fetched Lembaga Pengangkat data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandarAPIModel'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorModel'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorModel'
+
+  /v1/vervalptk-service/referensi/get-status-kepegawaian:
+    get:
+      description: Fetch Status Kepegawaian
+      tags:
+        - Reference Data
+      responses:
+        '200':
+          description: Successfully fetched Status Kepegawaian data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandarAPIModel'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorModel'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorModel'
+
+  /v1/vervalptk-service/referensi/get-sumber-gaji:
+    get:
+      description: Fetch Sumber Gaji
+      tags:
+        - Reference Data
+      responses:
+        '200':
+          description: Successfully fetched Sumber Gaji data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandarAPIModel'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorModel'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorModel'
+
+  /v1/vervalptk-service/referensi/get-desa-kelurahan:
+    get:
+      description: Fetch Desa/Kelurahan
+      tags:
+        - Reference Data
+      parameters:
+        - in: query
+          name: mst_kode_wilayah
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully fetched Desa/Kelurahan data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandarAPIModel'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorModel'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorModel'
+
+  /v1/vervalptk-service/referensi/get-kecamatan:
+    get:
+      description: Fetch Kecamatan
+      tags:
+        - Reference Data
+      parameters:
+        - in: query
+          name: mst_kode_wilayah
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully fetched Kecamatan data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandarAPIModel'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorModel'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorModel'
+
+  /v1/vervalptk-service/referensi/get-kabupaten:
+    get:
+      description: Fetch Kabupaten
+      tags:
+        - Reference Data
+      parameters:
+        - in: query
+          name: nama
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully fetched Kabupaten data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandarAPIModel'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorModel'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorModel'
+  /v1/vervalptk-service/referensi/get-wilayah:
+    get:
+      description: Fetch Kabupaten
+      tags:
+        - Reference Data
+      parameters:
+        - in: query
+          name: nama
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully fetched Kabupaten data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandarAPIModel'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorModel'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorModel'
+  /v1/vervalptk-service/referensi/get-jabatan-tugas-ptk:
+    get:
+      description: Fetch Jabatan Tugas PTK
+      tags:
+        - Reference Data
+      responses:
+        '200':
+          description: Successfully fetched Kabupaten data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandarAPIModel'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorModel'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorModel'
+  /v1/vervalptk-service/referensi/get-pekerjaan:
+    get:
+      description: Fetch Kewarganegaraan
+      tags:
+        - Reference Data
+      
+      responses:
+        '200':
+          description: Successfully fetched Kabupaten data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandarAPIModel'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorModel'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorModel'
+  /v1/vervalptk-service/referensi/get-sekolah-by-nama:
+    get:
+      description: Fetch Kabupaten
+      tags:
+        - Reference Data
+      parameters:
+        - in: query
+          name: kode_wilayah
+          schema:
+            type: string
+        - in: query
+          name: nama
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully fetched Kabupaten data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandarAPIModel'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorModel'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorModel'
+
+  /v1/vervalptk-service/referensi/get-reff-all:
+    post:
+      description: Fetch All Data Referensi
+      tags:
+        - Reference Data
+      # parameters:
+      requestBody:
+       content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                table_name:
+                  type: string
+                  maxLength: 100
+                  example: "1234567890123456"
+        # - name: table_name
+        #   in: query
+        #   schema:
+        #     type: string
+      responses:
+        '200':
+          description: Successfully fetched All Data Referensi.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandarAPIModel'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorModel'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorModel'
+  /v1/vervalptk-service/referensi/get-agama-by-id:
+    get:
+      description: Fetch Agama Data by ID
+      tags:
+        - Reference Detail Data
+      parameters:
+        - in: query
+          name: agama_id
+          required: true
+          description: ID of agama
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successfully fetched Agama data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandarAPIModel'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorModel'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorModel'
+
+  /v1/vervalptk-service/referensi/get-jenis-ptk-by-id:
+    get:
+      description: Fetch Jenis PTK by ID
+      tags:
+        - Reference Detail Data
+      parameters:
+        - in: query
+          name: jenis_ptk_id
+          required: true
+          description: ID of Jenis PTK
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successfully fetched Jenis PTK data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandarAPIModel'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorModel'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorModel'         
+  
+  /v1/vervalptk-service/referensi/get-kebutuhan-khusus-by-id:
+    get:
+      description: Fetch Kebutuhan Khusus by ID
+      tags:
+        - Reference Detail Data
+      parameters:
+        - in: query
+          name: kebutuhan_khusus_id
+          required: true
+          description: ID of Kebutuhan Khusus
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successfully fetched Kebutuhan Khusus data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandarAPIModel'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorModel'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorModel'
+
+  /v1/vervalptk-service/referensi/get-lembaga-pengangkat-by-id:
+    get:
+      description: Fetch Lembaga Pengangkat by ID
+      tags:
+        - Reference Detail Data
+      parameters:
+        - in: query
+          name: lembaga_pengangkat_id
+          required: true
+          description: ID of Lembaga Pengangkat
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successfully fetched Lembaga Pengangkat data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandarAPIModel'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorModel'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorModel'
+
+  /v1/vervalptk-service/referensi/get-status-kepegawaian-by-id:
+    get:
+      description: Fetch Status Kepegawaian by ID
+      tags:
+        - Reference Detail Data
+      parameters:
+        - in: query
+          name: status_kepegawaian_id
+          required: true
+          description: ID of Status Kepegawaian
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successfully fetched Status Kepegawaian data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandarAPIModel'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorModel'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorModel'
+
+  /v1/vervalptk-service/referensi/get-sumber-gaji-by-id:
+    get:
+      description: Fetch Sumber Gaji by ID
+      tags:
+        - Reference Detail Data
+      parameters:
+        - in: query
+          name: sumber_gaji_id
+          required: true
+          description: ID of Sumber Gaji
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successfully fetched Sumber Gaji data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandarAPIModel'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorModel'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorModel'
+  
+  /v1/vervalptk-service/referensi/get-detail-negara:
+    get:
+      description: Fetch Kewarganegaraan
+      tags:
+        - Reference Detail Data
+      parameters:
+        - in: query
+          name: negara_id
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully fetched Kabupaten data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandarAPIModel'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorModel'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorModel'
+components:
+  schemas:
+    StandarAPIModel:
+      type: object
+      properties:
+        status_code:
+          type: integer
+          example: 200
+        message:
+          type: string
+          description: The human-readable description of the code.
+          example: Success!
+        data:
+          type: object
+          example: {}
+
+    UnauthorizedErrorModel:
+      type: object
+      properties:
+        status_code:
+          type: integer
+          example: 401
+        message:
+          type: string
+          description: The user is not authorized to access this resource.
+          example: Unauthorized. The request requires valid user authentication.
+        data:
+          type: object
+          example: {}
+
+    BadRequestErrorModel:
+      type: object
+      properties:
+        status_code:
+          type: integer
+          example: 400
+        message:
+          type: string
+          description: The request could not be understood or was missing required parameters.
+          example: Bad Request. The request was invalid or cannot be served.
+        data:
+          type: object
+          example: {}
+
+    NotFoundErrorModel:
+      type: object
+      properties:
+        status_code:
+          type: integer
+          example: 404
+        message:
+          type: string
+          description: The requested resource was not found.
+          example: Not Found. The requested resource could not be found.
+        data:
+          type: object
+          example: {}
+
+  responses:
+    OKwithAppParamList:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StandarAPIModel'
+    UnauthorizedError:
+      description: Authorization token is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UnauthorizedErrorModel'
+    BadRequestError:
+      description: Bad Request (Malformed input syntax)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BadRequestErrorModel'
+    NotFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/NotFoundErrorModel'
+    ValidationFailed:
+      description: Unprocessable Entity
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StandarAPIModel'
+    Created:
+      description: Entity successfully created
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StandarAPIModel'
+      headers:
+        Location:
+          $ref: '#/components/headers/Location'
+    OK:
+      description: Operation performed successfully
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StandarAPIModel'
+
+  securitySchemes:
+    UserAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+
+
+# components:
+#   schemas:
+#     StandarAPIModel:
+#       type: object
+#       properties:
+#         status_code:
+#           type: integer
+#           example: 200
+#         message:
+#           type: string
+#           description: The human-readable description of the code.
+#           example: Success!
+#         data:
+#           type: object
+#           example: {}
+
+#   responses:
+#     OKwithAppParamList:
+#       description: OK
+#       content:
+#         application/json:
+#           schema:
+#             $ref: '#/components/schemas/StandarAPIModel'
+#     UnauthorizedError:
+#       description: Authorization token is missing or invalid
+#       content:
+#         application/json:
+#           schema:
+#             $ref: '#/components/schemas/StandarAPIModel'
+#     ForbiddenError:
+#       description: Authorization token is valid but doesn't have sufficient access permission
+#       content:
+#         application/json:
+#           schema:
+#             $ref: '#/components/schemas/StandarAPIModel'
+#     NotFoundError:
+#       description: Resource not found
+#       content:
+#         application/json:
+#           schema:
+#             $ref: '#/components/schemas/StandarAPIModel'
+#     BadRequestError:
+#       description: Bad Request (Malformed input syntax)
+#       content:
+#         application/json:
+#           schema:
+#             $ref: '#/components/schemas/StandarAPIModel'
+#     ValidationFailed:
+#       description: Unprocessable Entity
+#       content:
+#         application/json:
+#           schema:
+#             $ref: '#/components/schemas/StandarAPIModel'
+#     Created:
+#       description: Entity successfully created
+#       content:
+#         application/json:
+#           schema:
+#             $ref: '#/components/schemas/StandarAPIModel'
+#       headers:
+#         Location:
+#           $ref: '#/components/headers/Location'
+#     OK:
+#       description: Operation performed successfully
+#       content:
+#         application/json:
+#           schema:
+#             $ref: '#/components/schemas/StandarAPIModel'
+
+#   securitySchemes:
+#     UserAuth:
+#       type: http
+#       scheme: bearer
+#       bearerFormat: JWT

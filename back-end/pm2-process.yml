@@ -1,0 +1,3 @@
+apps:
+  - script : app/app.js
+    name   : 'sso-service'

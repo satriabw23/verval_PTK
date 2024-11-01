@@ -1,0 +1,342 @@
+openapi: 3.0.9
+info:
+  version: 'v1'
+  title: 'SSO Service'
+  description: |-
+    This is SSO.
+  contact:
+    name: Bersama Teknologi Unggul
+    email: support@btu.com
+  license:
+    name: BTU
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+  - description: Dev environment
+    url: https://{gateway}.example.com/v1/bas-service
+    variables:
+      gateway:
+        enum:
+          - 'user-api'
+          - 'admin-api'
+        default: 'user-api'
+tags:
+  - name: App Param
+    description: API used for application config.
+  - name: Permohonan Pembimbing
+    description: API modul permohonan pembimbing.
+  - name: Pengguna
+    description: API pengguna.
+
+paths:
+  
+  /app-params:
+    get:
+      description: |-
+        Required permissions: `permohonan_pembimbing:read:user` `permohonan_pembimbing:read:admin`
+      responses:
+        '200':
+          $ref: '#/components/responses/OKwithAppParamList'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      tags:
+        - App Param
+
+components:
+  schemas:
+    AppParamListResponseModel:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "JUMLAH PEMBIMBING S2"
+        code:
+          type: string
+          example: "JUMLAH_PEMBIMBING_S2"
+        value:
+          type: string
+          example: "2"
+        keterangan:
+          type: string
+          example: "tes"
+        parent:
+          type: string
+          example: "2"
+        expiredDate:
+          type: string
+          example: null
+          
+    FileUploadModel:
+      type: object
+      required:
+        - file
+      properties:
+        file:
+          description: The file to be attached.
+          type: string
+          format: binary
+            
+    StandarAPIModel:
+      type: object
+      properties:
+        status_code:
+          type: integer
+          example: 200
+        message:
+          type: string
+          description: The human-readable description of the code.
+          example: Success!
+        data:
+          type: object
+          example: []
+    
+    SuccessStatusFilePathUrl:
+      type: object
+      properties:
+        status_code:
+          type: integer
+          example: 200
+        message:
+          type: string
+          description: The human-readable description of the code.
+          example: Success!
+        data:
+           $ref: '#/components/schemas/FilePathUrlModel'
+
+  parameters:
+        
+    SortQueryParam:
+      name: sort
+      in: query
+      description: Sort data to be retrieved. Use (-) to descending
+      required: false
+      schema:
+        type: string
+        default: createdAt
+
+    PaginationOffsetQueryParam:
+      name: offset
+      in: query
+      description: Index offset of the data to be retrieved.
+      required: false
+      schema:
+        type: integer
+        default: 0
+
+    PaginationLimitQueryParam:
+      name: limit
+      in: query
+      description: The maximum number of records to be retrieved in a single request.
+      required: false
+      schema:
+        type: integer
+        default: 100
+
+    StartDateQueryParam:
+      name: startDate
+      in: query
+      description: The start date keyword to be used for filtering.
+      required: true
+      schema:
+        type: string
+        format: date
+        example: "2022-06-20"
+
+    EndDateQueryParam:
+      name: endDate
+      in: query
+      description: The end date keyword to be used for filtering.
+      required: true
+      schema:
+        type: string
+        format: date
+        example: "2022-06-27"
+
+    SearchKeywordQueryParam:
+      name: keyword
+      in: query
+      description: The search keyword to be used for filtering.
+      required: false
+      schema:
+        type: string
+
+  headers:
+    Location:
+      description: Relative path of the newly created resource.
+      schema:
+        type: string
+
+    X-Total-Count:
+      description: The total number of records in database that satisfy the filter criterias.
+      schema:
+        type: integer
+
+  examples:
+    Unauthorized:
+      summary: Unauthorized
+      value:
+        status_code: 401
+        message: Token tidak valid!
+        data: []
+
+    Forbidden:
+      summary: Forbidden
+      value:
+        status_code: 403
+        message: Token tidak memiliki akses!
+        data: []
+
+    NotFound:
+      summary: Resource Not Found
+      value:
+        status_code: 404
+        message: Data tidak ditemukan!
+        data: []
+
+    BadRequest:
+      summary: Bad Request
+      value:
+        status_code: 400
+        message: Request tidak valid!
+        data: []
+
+    ValidationFailed:
+      summary: Validation Failed
+      value:
+        status_code: 422
+        message: Request tidak valid!
+        data: []
+
+    SemanticError:
+      summary: Semantic Error
+      value:
+        status_code: 400
+        message: Semantic error!
+        data: []
+
+    Created:
+      summary: Entity successfully created
+      value:
+        status_code: 200
+        message: Success!
+        data: []
+        
+    OK:
+      summary: Operation processed successfully
+      value:
+        status_code: 200
+        message: Success
+        data: []
+
+  responses:
+    OKwithAppParamList:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SuccessStatusAppParamsListResponseModel'
+            
+    UnauthorizedError:
+      description: Authorization token is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StandarAPIModel'
+          examples:
+            Unauthorized:
+              $ref: '#/components/examples/Unauthorized'
+
+    ForbiddenError:
+      description: Authorization token is valid but doesn't have sufficient access permission
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                $ref: '#/components/schemas/StandarAPIModel'
+          examples:
+            Forbidden:
+              $ref: '#/components/examples/Forbidden'
+
+    NotFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                $ref: '#/components/schemas/StandarAPIModel'
+          examples:
+            BadRequest:
+              $ref: '#/components/examples/NotFound'
+
+    BadRequestError:
+      description: Bad Request (Malformed input syntax)
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                $ref: '#/components/schemas/StandarAPIModel'
+          examples:
+            BadRequest:
+              $ref: '#/components/examples/BadRequest'
+
+    ValidationFailed:
+      description: Unprocessable Entity
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                $ref: '#/components/schemas/StandarAPIModel'
+          examples:
+            ValidationFailed:
+              $ref: '#/components/examples/ValidationFailed'
+            SemanticError:
+              $ref: '#/components/examples/SemanticError'
+
+    Created:
+      description: Entity successfully created
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                $ref: '#/components/schemas/StandarAPIModel'
+          examples:
+            Created:
+              $ref: '#/components/examples/Created'
+      headers:
+        Location:
+          $ref: '#/components/headers/Location'
+
+    OK:
+      description: Operation performed successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                $ref: '#/components/schemas/StandarAPIModel'
+          examples:
+            OK:
+              $ref: '#/components/examples/OK'
+
+  securitySchemes:
+    UserAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
